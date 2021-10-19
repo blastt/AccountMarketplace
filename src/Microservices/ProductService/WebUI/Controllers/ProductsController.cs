@@ -1,5 +1,7 @@
 ﻿using Application.Common.Models;
 using Application.Products.Queries;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -9,16 +11,12 @@ namespace WebUI.Controllers
 {
     public class ProductsController : ApiControllerBase
     {
-        //[HttpGet]
-        //public async Task<ActionResult<PaginatedList<ProductDto>>> GetProducts([FromQuery] GetProductsQuery query)
-        //{
-        //    return await Mediator.Send(query);
-        //}
-
+        
         [HttpGet]
-        public async Task<ActionResult<PaginatedList<ProductDto>>> GetProducts()
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<PaginatedList<ProductDto>>> GetProducts([FromQuery] GetProductsWithPaginationQuery query)
         {
-            return await Mediator.Send(new GetProductsQuery());
+            return await Mediator.Send(query);
         }
     }
 }

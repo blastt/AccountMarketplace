@@ -1,9 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Common;
 using Domain.Entities;
-using IdentityServer4.EntityFramework.Options;
-using Infrastructure.Indentity;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Options;
@@ -17,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
@@ -25,10 +22,9 @@ namespace Infrastructure.Persistance
 
         public ApplicationDbContext(
             DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions,
             ICurrentUserService currentUserService,
             IDomainEventService domainEventService,
-            IDateTime dateTime) : base(options, operationalStoreOptions)
+            IDateTime dateTime) : base(options)
         {
             _currentUserService = currentUserService;
             _domainEventService = domainEventService;

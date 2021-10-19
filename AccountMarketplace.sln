@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30611.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{664A31C3-F419-4CA5-878D-E3939694303D}"
 EndProject
@@ -20,6 +20,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Microservices\ProductService\Infrastructure\Infrastructure.csproj", "{0005D456-AD57-4B5B-A453-D0B79465B171}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "src\Microservices\ProductService\WebUI\WebUI.csproj", "{86DFE64F-6AA8-4887-96FE-E0D2BB2B8B41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthenticationService", "AuthenticationService", "{2CBB46E9-4A4D-4C47-8742-18717FD4A43F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationServiceApi", "src\Microservices\AuthenticationService\AuthenticationServiceApi\AuthenticationServiceApi.csproj", "{FCBD1B94-99A8-414D-943C-DB836B7045DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{86DFE64F-6AA8-4887-96FE-E0D2BB2B8B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86DFE64F-6AA8-4887-96FE-E0D2BB2B8B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86DFE64F-6AA8-4887-96FE-E0D2BB2B8B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBD1B94-99A8-414D-943C-DB836B7045DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBD1B94-99A8-414D-943C-DB836B7045DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBD1B94-99A8-414D-943C-DB836B7045DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBD1B94-99A8-414D-943C-DB836B7045DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +68,8 @@ Global
 		{BE0B727F-612D-4CA0-AF17-D1F479316FB7} = {46B47D92-1370-44C1-852E-EA2E999B522B}
 		{0005D456-AD57-4B5B-A453-D0B79465B171} = {46B47D92-1370-44C1-852E-EA2E999B522B}
 		{86DFE64F-6AA8-4887-96FE-E0D2BB2B8B41} = {46B47D92-1370-44C1-852E-EA2E999B522B}
+		{2CBB46E9-4A4D-4C47-8742-18717FD4A43F} = {3152A27A-9360-474F-8519-E3A11CFD6DB9}
+		{FCBD1B94-99A8-414D-943C-DB836B7045DD} = {2CBB46E9-4A4D-4C47-8742-18717FD4A43F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C27DCA8-6B00-49C4-97C9-F74D7554F3AD}

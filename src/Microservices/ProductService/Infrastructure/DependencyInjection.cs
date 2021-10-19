@@ -1,5 +1,4 @@
 ﻿using Application.Common.Interfaces;
-using Infrastructure.Indentity;
 using Infrastructure.Persistance;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -36,24 +35,8 @@ namespace Infrastructure
 
             services.AddScoped<IDomainEventService, DomainEventService>();
 
-            services
-                .AddDefaultIdentity<ApplicationUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             services.AddTransient<IDateTime, DateTimeService>();
-            services.AddTransient<IIdentityService, IdentityService>();
-
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("CanPurge", policy => policy.RequireRole("Administrator"));
-            });
 
             return services;
         }
