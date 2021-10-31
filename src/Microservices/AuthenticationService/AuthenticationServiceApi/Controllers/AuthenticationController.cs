@@ -23,11 +23,11 @@ namespace AuthenticationServiceApi.Controllers
             _tokenBuilder = tokenBuilder;
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] User user)
+        public async Task<IActionResult> Login([FromBody] ApplicationUser user)
         {
             var dbUser = await _context
                 .Users
-                .SingleOrDefaultAsync(u => u.Username == user.Username);
+                .SingleOrDefaultAsync(u => u.UserName == user.UserName);
 
             if (dbUser == null)
             {
@@ -36,14 +36,8 @@ namespace AuthenticationServiceApi.Controllers
 
             // This is just an example, made for simplicity; do not store plain passwords in the database
             // Always hash and salt your passwords
-            var isValid = dbUser.Password == user.Password;
-
-            if (!isValid)
-            {
-                return BadRequest("Could not authenticate user.");
-            }
-
-            var token = _tokenBuilder.BuildToken(user.Username);
+            //var isValid = dbUser.Password == user.Password;
+            var token = _tokenBuilder.BuildToken("");
 
             return Ok(token);
         }
