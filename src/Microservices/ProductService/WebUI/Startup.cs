@@ -38,9 +38,8 @@ namespace WebUI
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddHttpContextAccessor();
-            //services.AddHealthChecks()
-            //    .AddDbContextCheck<ApplicationDbContext>();
 
+            var jwtKey = Environment.GetEnvironmentVariable("jwt-key");
             services
                .AddAuthentication(options =>
                {
@@ -53,7 +52,7 @@ namespace WebUI
                     cfg.SaveToken = true;
                     cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
                     {
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("placeholder-key-that-is-long-enough-for-sha256")),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
                         ValidateAudience = false,
                         ValidateIssuer = false,
                         ValidateLifetime = false,
