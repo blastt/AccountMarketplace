@@ -46,7 +46,8 @@ namespace Application.Users.Queries
                 {
                     Email = "Not implemented",
                     Token = _jwtGenerator.CreateToken(request.UserName),
-                    UserName = request.UserName
+                    UserName = request.UserName,
+                    Roles = (await _identityService.GetUserRoles(userId)).ToArray()
                 };
             }
             throw new Exception(HttpStatusCode.Unauthorized.ToString());

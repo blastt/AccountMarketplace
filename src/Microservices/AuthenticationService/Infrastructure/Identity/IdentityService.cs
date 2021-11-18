@@ -103,5 +103,16 @@ namespace Infrastructure.Identity
             var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
             return result.ToApplicationResult();
         }
+
+        public async Task<IList<string>> GetUserRoles(string userId)
+        {
+            var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                throw new Exception("User does not exist");
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            return roles;
+        }
     }
 }

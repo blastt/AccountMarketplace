@@ -1,4 +1,5 @@
 ﻿using Application.Common.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces
@@ -16,5 +17,6 @@ namespace Application.Common.Interfaces
 
         Task<Result> DeleteUserAsync(string userId);
         Task<SignInResult> CheckPasswordSignInAsync(string userId, string password);
+        Task<IList<string>> GetUserRoles(string userId);
     }
 }
