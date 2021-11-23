@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Application.Common.Models;
+using Application.Users.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,12 +38,18 @@ namespace Infrastructure.Identity
             return user.UserName;
         }
 
-        public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
+        public async Task<bool> IsEmailExist(string email)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == email);
+            return user != null;
+        }
+
+        public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password, string email)
         {
             var user = new ApplicationUser
             {
                 UserName = userName,
-                Email = userName,
+                Email = email
             };
 
             var result = await _userManager.CreateAsync(user, password);
@@ -89,13 +96,17 @@ namespace Infrastructure.Identity
 
         public async Task<string> GetUserIdAsync(string userName)
         {
-            var user = await _userManager.Users.FirstAsync(u => u.UserName == userName);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+            if (user == null)
+            {
+                return null;
+            }
             return user.Id;
         }
 
         public async Task<Application.Common.Models.SignInResult> CheckPasswordSignInAsync(string userId, string password)
         {
-            var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
             {
                 throw new Exception("Unauthorized");
@@ -104,9 +115,17 @@ namespace Infrastructure.Identity
             return result.ToApplicationResult();
         }
 
+        public async Task<Result> Register(string userName, string email, string password)
+        {
+            var user = new ApplicationUser() { UserName = userName, Email = email };
+            var result = await _userManager.CreateAsync(user, password);
+            return result.ToApplicationResult();
+            
+        }
+
         public async Task<IList<string>> GetUserRoles(string userId)
         {
-            var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
             {
                 throw new Exception("User does not exist");
@@ -114,5 +133,6 @@ namespace Infrastructure.Identity
             var roles = await _userManager.GetRolesAsync(user);
             return roles;
         }
+
     }
 }
