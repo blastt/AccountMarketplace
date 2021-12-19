@@ -35,8 +35,10 @@ namespace WebUI
             services.AddApplication();
             services.AddInfrastructure(Configuration);
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
-            var jwtKey = Environment.GetEnvironmentVariable("jwt-key");
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+
+            string secret = Configuration["jwt-key-new"];
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
                 opt =>
                 {
@@ -75,6 +77,7 @@ namespace WebUI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

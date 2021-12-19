@@ -33,21 +33,21 @@ namespace Application.Users.Queries
         }
         public async Task<UserDto> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            var userId = await _identityService.GetUserIdAsync(request.UserName);
-            if (userId == null)
+            var user = await _identityService.GetUserByUserNameAsync(request.UserName);
+            if (user == null)
             {
                 throw new Exception(HttpStatusCode.Unauthorized.ToString());
             }
-            var result = await _identityService.CheckPasswordSignInAsync(userId, request.Password);
+            var result = await _identityService.CheckPasswordSignInAsync(user.UserId, request.Password);
 
             if (result.Succeeded)
             {
                 return new UserDto
                 {
-                    Email = "Not implemented",
+                    Email = user.Email,
                     Token = _jwtGenerator.CreateToken(request.UserName),
                     UserName = request.UserName,
-                    Roles = (await _identityService.GetUserRoles(userId)).ToArray()
+                    Roles = (await _identityService.GetUserRoles(user.UserId)).ToArray()
                 };
             }
             throw new Exception(HttpStatusCode.Unauthorized.ToString());

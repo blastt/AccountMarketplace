@@ -8,6 +8,10 @@ namespace Application.Common.Interfaces
     {
         Task<string> GetUserNameAsync(string userId);
         Task<string> GetUserIdAsync(string userName);
+        Task<GetUserResult> GetUserByIdAsync(string userId);
+
+        Task<GetUserResult> GetUserByUserNameAsync(string userName);
+
         Task<bool> IsEmailExist(string email);
 
         Task<bool> IsInRoleAsync(string userId, string role);

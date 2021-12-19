@@ -18,8 +18,8 @@ namespace Infrastructure.Security
 
         public JwtGenerator(IConfiguration config)
         {
-            var jwtKey = Environment.GetEnvironmentVariable("jwt-key");
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+            string secret = config["jwt-key-new"];
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
         }
 
         public string CreateToken(string userName)
@@ -31,7 +31,7 @@ namespace Infrastructure.Security
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.Now.AddDays(30),
                 SigningCredentials = credentials
             };
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -15,12 +15,20 @@ namespace Infrastructure.Persistance
             // Seed, if necessary
             if (!context.Products.Any())
             {
-                context.Products.Add(new Product
+                context.Products.AddRange(
+                new Product
                 {
                     Header = "Test header",
                     Description = "Test description",
                     Login = "mylogin111",
                     Price = 1000
+                },
+                new Product
+                {
+                    Header = "Test header 2",
+                    Description = "Test description 2",
+                    Login = "mylogin111",
+                    Price = 2000
                 });
 
                 await context.SaveChangesAsync();

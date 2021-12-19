@@ -39,29 +39,28 @@ namespace WebUI
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddHttpContextAccessor();
 
-            var jwtKey = Environment.GetEnvironmentVariable("jwt-key");
-            services
-               .AddAuthentication(options =>
-               {
-                   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-               })
-                .AddJwtBearer(cfg =>
+            string secret = Configuration["jwt-key-new"];
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+                opt =>
                 {
-                    cfg.RequireHttpsMetadata = true;
-                    cfg.SaveToken = true;
-                    cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                    opt.TokenValidationParameters = new TokenValidationParameters
                     {
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+                        
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = key,
                         ValidateAudience = false,
                         ValidateIssuer = false,
-                        ValidateLifetime = false,
-                        RequireExpirationTime = false,
-                        ClockSkew = TimeSpan.Zero,
-                        ValidateIssuerSigningKey = true
+                        ClockSkew = TimeSpan.Zero
                     };
                 });
-
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.WithOrigins("http://localhost:3000")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -79,8 +78,11 @@ namespace WebUI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebUI v1"));
             }
 
+            app.UseCors("MyPolicy");
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

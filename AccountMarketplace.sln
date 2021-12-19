@@ -23,15 +23,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "src\Microservices\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthenticationService", "AuthenticationService", "{2CBB46E9-4A4D-4C47-8742-18717FD4A43F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationServiceApi", "src\Microservices\AuthenticationService\AuthenticationServiceApi\AuthenticationServiceApi.csproj", "{FCBD1B94-99A8-414D-943C-DB836B7045DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Microservices\AuthenticationService\Application\Application.csproj", "{720DA465-FE2C-40EF-93E9-0FD34A29E683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Microservices\AuthenticationService\Application\Application.csproj", "{720DA465-FE2C-40EF-93E9-0FD34A29E683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Microservices\AuthenticationService\Domain\Domain.csproj", "{E7A3CA67-8D0B-4E54-98D2-6BACD831BE28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Microservices\AuthenticationService\Domain\Domain.csproj", "{E7A3CA67-8D0B-4E54-98D2-6BACD831BE28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Microservices\AuthenticationService\Infrastructure\Infrastructure.csproj", "{9E7D464A-82D7-49AF-BC95-994533A08FD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Microservices\AuthenticationService\Infrastructure\Infrastructure.csproj", "{9E7D464A-82D7-49AF-BC95-994533A08FD1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "src\Microservices\AuthenticationService\WebUI\WebUI.csproj", "{618B9701-9CF4-4C42-9136-85A8FB92C569}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "src\Microservices\AuthenticationService\WebUI\WebUI.csproj", "{618B9701-9CF4-4C42-9136-85A8FB92C569}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +57,6 @@ Global
 		{86DFE64F-6AA8-4887-96FE-E0D2BB2B8B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86DFE64F-6AA8-4887-96FE-E0D2BB2B8B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86DFE64F-6AA8-4887-96FE-E0D2BB2B8B41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCBD1B94-99A8-414D-943C-DB836B7045DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCBD1B94-99A8-414D-943C-DB836B7045DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCBD1B94-99A8-414D-943C-DB836B7045DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCBD1B94-99A8-414D-943C-DB836B7045DD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{720DA465-FE2C-40EF-93E9-0FD34A29E683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{720DA465-FE2C-40EF-93E9-0FD34A29E683}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{720DA465-FE2C-40EF-93E9-0FD34A29E683}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -93,7 +87,6 @@ Global
 		{0005D456-AD57-4B5B-A453-D0B79465B171} = {46B47D92-1370-44C1-852E-EA2E999B522B}
 		{86DFE64F-6AA8-4887-96FE-E0D2BB2B8B41} = {46B47D92-1370-44C1-852E-EA2E999B522B}
 		{2CBB46E9-4A4D-4C47-8742-18717FD4A43F} = {3152A27A-9360-474F-8519-E3A11CFD6DB9}
-		{FCBD1B94-99A8-414D-943C-DB836B7045DD} = {2CBB46E9-4A4D-4C47-8742-18717FD4A43F}
 		{720DA465-FE2C-40EF-93E9-0FD34A29E683} = {2CBB46E9-4A4D-4C47-8742-18717FD4A43F}
 		{E7A3CA67-8D0B-4E54-98D2-6BACD831BE28} = {2CBB46E9-4A4D-4C47-8742-18717FD4A43F}
 		{9E7D464A-82D7-49AF-BC95-994533A08FD1} = {2CBB46E9-4A4D-4C47-8742-18717FD4A43F}

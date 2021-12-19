@@ -34,8 +34,32 @@ namespace Infrastructure.Identity
         public async Task<string> GetUserNameAsync(string userId)
         {
             var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
-
+            if (user == null)
+            {
+                return null;
+            }
             return user.UserName;
+        }
+
+        public async Task<GetUserResult> GetUserByIdAsync(string id)
+        {
+            var user = await _userManager.Users.FirstAsync(u => u.Id == id);
+            
+            if (user == null)
+            {
+                return null;
+            }
+            return new GetUserResult { UserName = user.UserName, Email = user.Email, UserId = id };
+        }
+        public async Task<GetUserResult> GetUserByUserNameAsync(string userName)
+        {
+            var user = await _userManager.Users.FirstAsync(u => u.UserName == userName);
+
+            if (user == null)
+            {
+                return null;
+            }
+            return new GetUserResult { UserName = user.UserName, Email = user.Email, UserId = user.Id };
         }
 
         public async Task<bool> IsEmailExist(string email)
