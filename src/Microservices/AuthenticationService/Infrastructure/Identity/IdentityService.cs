@@ -33,7 +33,7 @@ namespace Infrastructure.Identity
 
         public async Task<string> GetUserNameAsync(string userId)
         {
-            var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
             {
                 return null;
@@ -43,7 +43,7 @@ namespace Infrastructure.Identity
 
         public async Task<GetUserResult> GetUserByIdAsync(string id)
         {
-            var user = await _userManager.Users.FirstAsync(u => u.Id == id);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
             
             if (user == null)
             {
@@ -53,7 +53,7 @@ namespace Infrastructure.Identity
         }
         public async Task<GetUserResult> GetUserByUserNameAsync(string userName)
         {
-            var user = await _userManager.Users.FirstAsync(u => u.UserName == userName);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == userName);
 
             if (user == null)
             {
